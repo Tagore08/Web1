@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThisIsAI — See What AI Can Actually Do</title>
+    <meta name="description" content="A showcase of AI-powered tools that Indian businesses should be using right now.">
+    <meta property="og:title" content="ThisIsAI — See What AI Can Actually Do">
+    <meta property="og:description" content="Explore 30+ AI tools across 6 categories that can transform Indian businesses.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        
+        /* ============================================
+           EMBER NOIR — BRAND IDENTITY SYSTEM
+           A 2026-forward palette where void meets spark.
+           ============================================ */
+        :root{
+            /* === THE VOID — Backgrounds === */
+            --void:#0A0908;           /* Primary - Deep warm darkness */
+            --obsidian:#151311;       /* Secondary - Lifted surface */
+            --graphite:#2A2725;       /* Cards, elevated elements */
+            
+            /* === THE FIRE — Accents === */
+            --ember:#FF5D3A;          /* Primary CTA - Electric coral */
+            --flame:#FFB347;          /* Secondary - Warm gold */
+            --inferno:#FF3D00;        /* Urgency - Intense orange */
+            
+            /* === THE ASH — Typography === */
+            --ash:#F5F2ED;            /* Primary text - Warm white */
+            --smoke:#A8A29E;          /* Secondary - Warm gray */
+            --cinder:#57534E;         /* Muted - Dark warm gray */
+            
+            /* === STRUCTURE === */
+            --coal:#3D3A36;           /* Borders */
+            --ember-glow:rgba(255,93,58,0.15);
+            --ember-bright:rgba(255,93,58,0.25);
+            --flame-glow:rgba(255,179,71,0.12);
+            
+            /* === SEMANTIC === */
+            --success:#22C55E;
+            --success-bg:rgba(34,197,94,0.1);
+            --success-bd:rgba(34,197,94,0.2);
+            --error:#EF4444;
+            --error-bg:rgba(239,68,68,0.1);
+            --error-bd:rgba(239,68,68,0.2);
+            
+            --f:'Inter',system-ui,sans-serif;
+        }
+        
+        html{scroll-behavior:smooth;font-size:16px}
+        body{font-family:var(--f);background:var(--void);color:var(--ash);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+        ::-webkit-scrollbar{width:5px}
+        ::-webkit-scrollbar-track{background:var(--void)}
+        ::-webkit-scrollbar-thumb{background:var(--coal);border-radius:10px}
+        ::selection{background:var(--ember);color:var(--void)}
+        a{text-decoration:none;color:inherit}
+        button{font-family:var(--f);cursor:pointer;border:none;outline:none}
+
+        /* Subtle warmth texture */
+        body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:10000;opacity:0.012;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+        /* ============================================
+           EMBER ORBS — Warm ambient glow
+           ============================================ */
+        .bg-orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+        .bg-orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:0.06;will-change:transform}
+        
+        .bg-orb-1{width:600px;height:600px;background:radial-gradient(circle,#FF5D3A,#FF3D00);top:-15%;right:-10%;animation:emberPulse1 8s ease-in-out infinite}
+        .bg-orb-2{width:450px;height:450px;background:radial-gradient(circle,#FFB347,#FF5D3A);bottom:-10%;left:-8%;animation:emberPulse2 10s ease-in-out infinite}
+        .bg-orb-3{width:350px;height:350px;background:radial-gradient(circle,#FF5D3A,#FFB347);top:45%;left:35%;animation:emberPulse3 12s ease-in-out infinite}
+
+        @keyframes emberPulse1{0%,100%{transform:translate(0,0) scale(1);opacity:0.05}50%{transform:translate(-30px,20px) scale(1.05);opacity:0.07}}
+        @keyframes emberPulse2{0%,100%{transform:translate(0,0) scale(1);opacity:0.04}50%{transform:translate(25px,-15px) scale(1.08);opacity:0.06}}
+        @keyframes emberPulse3{0%,100%{transform:translate(0,0) scale(1);opacity:0.03}50%{transform:translate(-20px,15px) scale(1.06);opacity:0.05}}
+
+        .container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+        /* ============================================
+           TICKER — Ember text on obsidian
+           ============================================ */
+        .ticker-wrap{position:fixed;top:0;left:0;right:0;z-index:1100;background:linear-gradient(90deg,#0D0B0A,#151311,#0D0B0A);border-bottom:1px solid var(--coal);overflow:hidden;height:36px;display:flex;align-items:center}
+        .ticker{display:flex;white-space:nowrap;animation:tickScroll 55s linear infinite}
+        .ticker span{display:inline-flex;align-items:center;gap:10px;padding:0 36px;font-size:12px;font-weight:600;color:var(--ember);letter-spacing:.15px}
+        .ticker span::before{content:'◈';font-size:8px;color:var(--flame)}
+        @keyframes tickScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        /* ============================================
+           NAVBAR — Clean & warm
+           ============================================ */
+        .navbar{position:fixed;top:36px;left:0;right:0;z-index:1000;padding:16px 0;transition:all .3s}
+        .navbar.scrolled{background:rgba(10,9,8,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--coal);padding:12px 0}
+        .navbar .container{display:flex;align-items:center;justify-content:space-between}
+        .nav-logo{font-size:22px;font-weight:800;letter-spacing:-0.5px}
+        .nav-logo .lo-t{color:var(--ash)}.nav-logo .lo-i{color:var(--ember)}.nav-logo .lo-a{color:var(--smoke)}
+        .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+        .nav-links a{font-size:13px;font-weight:500;color:var(--smoke);transition:color .25s;position:relative}
+        .nav-links a:hover{color:var(--ember)}
+        .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--ember),var(--flame));transition:width .25s;border-radius:1px}
+        .nav-links a:hover::after{width:100%}
+        .hamburger{display:none;flex-direction:column;gap:5px;background:none;padding:8px;z-index:1001}
+        .hamburger span{display:block;width:22px;height:2px;background:var(--ash);transition:all .25s;border-radius:2px}
+        .hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+        .hamburger.active span:nth-child(2){opacity:0}
+        .hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+        .mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,9,8,.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .3s}
+        .mobile-menu.active{opacity:1;pointer-events:all}
+        .mobile-menu a{font-size:20px;font-weight:600;color:var(--smoke);transition:color .25s}
+        .mobile-menu a:hover{color:var(--ember)}
+
+        /* ============================================
+           HERO — The spark
+           ============================================ */
+        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:160px 24px 100px}
+        .hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,93,58,.025) 1px,transparent 0);background-size:36px 36px;mask-image:radial-gradient(ellipse at center,black 10%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at center,black 10%,transparent 70%)}
+        .hero-content{position:relative;z-index:2;max-width:820px}
+        
+        /* Badge with ember glow */
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--ember-glow);border:1px solid rgba(255,93,58,.2);padding:10px 24px;border-radius:100px;font-size:12px;font-weight:600;color:var(--ember);margin-bottom:32px;letter-spacing:.3px}
+        
+        /* Main heading */
+        .hero-title{font-size:58px;font-weight:800;line-height:1.1;letter-spacing:-.025em;margin-bottom:24px}
+        .hero-title .l1{color:var(--ash)}
+        .hero-title .l2{background:linear-gradient(135deg,var(--ember) 0%,var(--flame) 50%,#FFD699 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        
+        .hero-sub{font-size:17px;color:var(--smoke);line-height:1.75;max-width:540px;margin:0 auto 40px}
+        
+        /* CTA — The ember button */
+        .hero-cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--ember),var(--inferno));color:var(--void);padding:16px 38px;border-radius:10px;font-size:14px;font-weight:700;letter-spacing:.25px;transition:all .25s;box-shadow:0 0 40px var(--ember-glow)}
+        .hero-cta:hover{transform:translateY(-2px);box-shadow:0 0 60px var(--ember-bright),0 10px 40px rgba(255,93,58,.2)}
+        
+        .hero-stats{display:flex;align-items:center;justify-content:center;gap:60px;margin-top:64px;padding-top:32px;border-top:1px solid var(--coal)}
+        .hero-stat-n{font-size:34px;font-weight:800;color:var(--ember)}
+        .hero-stat-l{font-size:11px;color:var(--cinder);margin-top:4px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600}
+
+        /* Section utilities */
+        .section{padding:100px 0;position:relative;z-index:1}
+        .s-label{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--ember);margin-bottom:12px}
+        .s-title{font-size:42px;font-weight:800;line-height:1.12;margin-bottom:16px;letter-spacing:-.02em;color:var(--ash)}
+        .s-sub{font-size:15px;color:var(--smoke);max-width:500px;line-height:1.7}
+        .s-header{text-align:center;margin-bottom:56px}
+        .s-header .s-sub{margin:0 auto}
+        .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+        .reveal.active{opacity:1;transform:translateY(0)}
+        .rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
+
+        /* Cost Section */
+        .cost-section{background:var(--obsidian);border-top:1px solid var(--coal);border-bottom:1px solid var(--coal)}
+        .cost-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+        .cost-card{background:linear-gradient(135deg,rgba(42,39,37,.6),rgba(42,39,37,.3));border:1px solid var(--coal);border-radius:16px;padding:28px 20px;text-align:center;transition:all .25s}
+        .cost-card:hover{border-color:rgba(255,93,58,.2);transform:translateY(-3px);box-shadow:0 0 30px var(--ember-glow)}
+        .cost-icon{font-size:28px;margin-bottom:12px}
+        .cost-num{font-size:28px;font-weight:800;color:var(--error);margin-bottom:6px;line-height:1.1}
+        .cost-text{font-size:13px;color:var(--smoke);line-height:1.5}
+
+        /* Categories */
+        .cat-showcase{display:flex;flex-direction:column;gap:0}
+        .cat-block{border-bottom:1px solid var(--coal)}
+        .cat-block:last-child{border-bottom:none}
+
+        .cat-top{display:flex;align-items:center;justify-content:space-between;padding:24px 0;cursor:pointer;transition:all .2s}
+        .cat-top:hover{padding-left:4px}
+        .cat-top-left{display:flex;align-items:center;gap:16px}
+        
+        .cat-icon-wrap{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;transition:all .2s}
+        .cat-block:hover .cat-icon-wrap{transform:scale(1.04)}
+
+        .ico-img{background:rgba(255,93,58,.1);border:1px solid rgba(255,93,58,.15)}
+        .ico-vid{background:rgba(255,179,71,.08);border:1px solid rgba(255,179,71,.15)}
+        .ico-chat{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15)}
+        .ico-voice{background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.15)}
+        .ico-web{background:rgba(255,93,58,.08);border:1px solid rgba(255,93,58,.15)}
+        .ico-auto{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.15)}
+
+        .cat-meta h3{font-size:20px;font-weight:700;margin-bottom:2px;letter-spacing:-.01em;color:var(--ash)}
+        .cat-meta p{font-size:12px;color:var(--cinder);font-weight:500}
+        .cat-count{display:flex;align-items:center;gap:12px;flex-shrink:0}
+        .cat-count-badge{background:var(--graphite);border:1px solid var(--coal);padding:6px 14px;border-radius:100px;font-size:11px;font-weight:600;color:var(--smoke)}
+        
+        .cat-arrow{width:32px;height:32px;border-radius:8px;background:rgba(255,93,58,.08);border:1px solid var(--coal);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+        .cat-arrow svg{width:12px;height:12px;stroke:var(--ember);transition:transform .2s;stroke-width:2.5;stroke-linecap:round;fill:none}
+        .cat-block.open .cat-arrow{background:var(--ember);border-color:var(--ember);box-shadow:0 0 15px var(--ember-glow)}
+        .cat-block.open .cat-arrow svg{transform:rotate(180deg);stroke:var(--void)}
+
+        .cat-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1)}
+        .cat-block.open .cat-body{max-height:5000px}
+        .cat-body-inner{padding:0 0 20px}
+        .cat-desc{font-size:14px;color:var(--smoke);line-height:1.7;max-width:650px;margin-bottom:28px}
+
+        /* Tools list */
+        .tools-list{display:flex;flex-direction:column;gap:10px}
+        .tl-item{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:start;padding:18px 20px;background:linear-gradient(135deg,rgba(42,39,37,.5),rgba(42,39,37,.25));border:1px solid var(--coal);border-radius:12px;transition:all .2s;position:relative;overflow:hidden}
+        .tl-item::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;opacity:0;transition:opacity .2s}
+        .tl-item:hover{border-color:rgba(255,93,58,.2);background:linear-gradient(135deg,rgba(42,39,37,.7),rgba(42,39,37,.4))}
+        .tl-item:hover::before{opacity:1}
+        .tl-item[data-a="img"]::before{background:linear-gradient(180deg,var(--ember),var(--flame))}
+        .tl-item[data-a="vid"]::before{background:linear-gradient(180deg,var(--flame),#FFD699)}
+        .tl-item[data-a="chat"]::before{background:linear-gradient(180deg,var(--success),#4ADE80)}
+        .tl-item[data-a="voice"]::before{background:linear-gradient(180deg,#A855F7,#C084FC)}
+        .tl-item[data-a="web"]::before{background:linear-gradient(180deg,var(--ember),var(--inferno))}
+        .tl-item[data-a="auto"]::before{background:linear-gradient(180deg,#FBBF24,#FCD34D)}
+
+        .tl-num{width:28px;height:28px;border-radius:6px;background:rgba(255,93,58,.1);border:1px solid rgba(255,93,58,.15);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--ember);flex-shrink:0;margin-top:2px}
+        .tl-niche{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--cinder);margin-bottom:4px;padding:3px 8px;background:rgba(255,93,58,.05);border-radius:4px}
+        .tl-name{font-size:15px;font-weight:600;margin-bottom:3px;color:var(--ash)}
+        .tl-desc{font-size:13px;color:var(--smoke);line-height:1.55}
+        .tl-compare{display:flex;flex-direction:column;gap:5px;min-width:200px}
+        .tl-cmp{padding:8px 10px;border-radius:6px;font-size:11px;display:flex;align-items:flex-start;gap:6px}
+        .tl-cmp-w{background:var(--success-bg);border:1px solid var(--success-bd)}
+        .tl-cmp-x{background:var(--error-bg);border:1px solid var(--error-bd)}
+        .tl-cmp-icon{font-size:11px;flex-shrink:0;margin-top:1px}
+        .tl-cmp-w .tl-cmp-t{color:var(--success);line-height:1.4}
+        .tl-cmp-x .tl-cmp-t{color:var(--error);line-height:1.4}
+
+        /* Demo Video Box */
+        .demo-video{margin:0 0 40px;padding:28px 0;border-bottom:1px solid var(--coal)}
+        .demo-video:last-of-type{border-bottom:none}
+        .demo-label{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+        .demo-label-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--coal),transparent)}
+        .demo-label-text{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--cinder);white-space:nowrap;display:flex;align-items:center;gap:8px}
+        .demo-label-text .demo-dot{width:5px;height:5px;border-radius:50%;background:var(--ember);box-shadow:0 0 8px var(--ember-glow)}
+
+        .demo-box{aspect-ratio:16/9;max-width:720px;margin:0 auto;border-radius:14px;overflow:hidden;position:relative;background:linear-gradient(135deg,var(--obsidian),var(--graphite));border:1px solid var(--coal);transition:all .25s;cursor:pointer}
+        .demo-box:hover{border-color:rgba(255,93,58,.25);box-shadow:0 0 40px var(--ember-glow)}
+        .demo-box::before,.demo-box::after{content:'';position:absolute;width:24px;height:24px;border:1px solid rgba(255,93,58,.15);transition:border-color .2s}
+        .demo-box::before{top:12px;left:12px;border-right:none;border-bottom:none;border-radius:2px 0 0 0}
+        .demo-box::after{bottom:12px;right:12px;border-left:none;border-top:none;border-radius:0 0 2px 0}
+        .demo-box:hover::before,.demo-box:hover::after{border-color:rgba(255,93,58,.3)}
+
+        .demo-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+        .play-big{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--ember),var(--inferno));display:flex;align-items:center;justify-content:center;transition:all .25s;box-shadow:0 0 30px var(--ember-glow)}
+        .demo-box:hover .play-big{transform:scale(1.06);box-shadow:0 0 50px var(--ember-bright)}
+        .play-big svg{width:22px;height:22px;fill:var(--void);margin-left:2px}
+        .demo-title{font-size:13px;font-weight:600;color:var(--smoke)}
+        .demo-sub{font-size:11px;color:var(--cinder)}
+
+        /* How it works */
+        .how-section{background:var(--obsidian);border-top:1px solid var(--coal);border-bottom:1px solid var(--coal)}
+        .steps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative}
+        .steps-row::before{content:'';position:absolute;top:40px;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--ember),transparent);opacity:.2}
+        .step{text-align:center;position:relative}
+        .step-icon{width:80px;height:80px;border-radius:50%;background:rgba(255,93,58,.08);border:1px solid rgba(255,93,58,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;position:relative;z-index:2;transition:all .2s}
+        .step:hover .step-icon{box-shadow:0 0 25px var(--ember-glow)}
+        .step h3{font-size:16px;font-weight:600;margin-bottom:6px;color:var(--ash)}
+        .step p{font-size:13px;color:var(--smoke);max-width:220px;margin:0 auto;line-height:1.55}
+
+        /* Comparison Table */
+        .cmp-table{max-width:720px;margin:0 auto;border-radius:12px;overflow:hidden;border:1px solid var(--coal);background:linear-gradient(135deg,rgba(42,39,37,.5),rgba(42,39,37,.25))}
+        .cmp-row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--coal)}
+        .cmp-row:last-child{border-bottom:none}
+        .cmp-head{background:rgba(255,93,58,.06)}
+        .cmp-cell{padding:14px 20px;font-size:13px;display:flex;align-items:center;gap:8px}
+        .cmp-cell:first-child{border-right:1px solid var(--coal)}
+        .cmp-head .cmp-cell{font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:1px}
+        .cmp-cell.bad{color:var(--cinder)}.cmp-cell.good{color:var(--smoke)}
+        .ck{color:var(--success);font-weight:700}.cx{color:var(--error);font-weight:700}
+
+        /* About */
+        .about-section{background:var(--obsidian);border-top:1px solid var(--coal);border-bottom:1px solid var(--coal)}
+        .about-inner{max-width:580px;margin:0 auto;text-align:center}
+        .about-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--ember),var(--flame));display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:30px;box-shadow:0 0 40px var(--ember-glow)}
+        .about-text{font-size:15px;color:var(--smoke);line-height:1.75;margin-bottom:20px}
+        .about-tags{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+        .about-tag{background:var(--graphite);border:1px solid var(--coal);padding:8px 16px;border-radius:100px;font-size:12px;color:var(--smoke);font-weight:500;transition:all .2s}
+        .about-tag:hover{border-color:rgba(255,93,58,.2)}
+
+        /* Contact */
+        .contact-section{position:relative;overflow:hidden}
+        .contact-wrap{max-width:480px;margin:0 auto;position:relative;z-index:2}
+        .c-form{display:flex;flex-direction:column;gap:14px}
+        .fg{display:flex;flex-direction:column;gap:4px}
+        .fg label{font-size:11px;font-weight:600;color:var(--cinder);text-transform:uppercase;letter-spacing:1px}
+        .fg input,.fg select,.fg textarea{background:var(--graphite);border:1px solid var(--coal);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--ash);font-family:var(--f);transition:all .2s;outline:none;width:100%}
+        .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--ember);box-shadow:0 0 0 3px var(--ember-glow)}
+        .fg textarea{resize:vertical;min-height:90px}
+        .fg select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%2357534E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+        .fg select option{background:var(--graphite);color:var(--ash)}
+        
+        .submit-btn{background:linear-gradient(135deg,var(--ember),var(--inferno));color:var(--void);padding:14px 24px;border-radius:10px;font-size:14px;font-weight:700;transition:all .25s;margin-top:4px;box-shadow:0 0 25px var(--ember-glow)}
+        .submit-btn:hover{transform:translateY(-2px);box-shadow:0 0 40px var(--ember-bright)}
+        
+        .divider{display:flex;align-items:center;gap:12px;margin:6px 0}
+        .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--coal)}
+        .divider span{font-size:11px;color:var(--cinder);font-weight:500}
+        .wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:white;padding:14px 24px;border-radius:10px;font-size:14px;font-weight:600;transition:all .2s}
+        .wa-btn:hover{background:#22c55e;transform:translateY(-1px)}
+
+        /* Footer */
+        .footer{padding:32px 0;border-top:1px solid var(--coal);position:relative;z-index:1}
+        .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+        .footer-brand{font-size:16px;font-weight:800}.footer-brand .fi{color:var(--ember)}.footer-brand .fa{color:var(--smoke)}
+        .footer-tagline{font-size:11px;color:var(--cinder);margin-top:2px}
+        .footer-nav{display:flex;gap:24px;list-style:none}
+        .footer-nav a{font-size:12px;color:var(--cinder);transition:color .2s}
+        .footer-nav a:hover{color:var(--ember)}
+        .footer-bottom{text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--coal);font-size:11px;color:var(--cinder)}
+
+        /* Responsive */
+        @media(max-width:1024px){
+            .cost-grid{grid-template-columns:repeat(2,1fr)}
+            .tl-item{grid-template-columns:auto 1fr;gap:14px}
+            .tl-compare{grid-column:1/-1;flex-direction:row}
+        }
+        @media(max-width:768px){
+            .section{padding:64px 0}
+            .s-title{font-size:28px}
+            .s-sub{font-size:14px}
+            .hero-title{font-size:34px}
+            .hero-sub{font-size:15px}
+            .hero-stats{flex-direction:column;gap:16px}
+            .hero-stat-n{font-size:28px}
+            .nav-links{display:none}
+            .hamburger{display:flex}
+            .mobile-menu{display:flex}
+            .steps-row{grid-template-columns:1fr;gap:28px}
+            .steps-row::before{display:none}
+            .tl-item{grid-template-columns:1fr;gap:8px}
+            .tl-num{display:none}
+            .tl-compare{flex-direction:column}
+            .cat-meta h3{font-size:17px}
+            .cat-meta p{font-size:11px}
+            .cat-icon-wrap{width:44px;height:44px;font-size:20px;border-radius:10px}
+            .cat-top-left{gap:12px}
+            .cat-count-badge{display:none}
+            .cmp-cell{padding:10px 14px;font-size:12px}
+            .footer-row{flex-direction:column;text-align:center}
+            .footer-nav{justify-content:center}
+            .about-tags{flex-direction:column;align-items:center}
+            .ticker span{padding:0 24px;font-size:11px}
+            .demo-box{border-radius:12px}
+            .cat-desc{font-size:13px}
+            .hero-cta{padding:14px 30px;font-size:13px}
+            .s-header{margin-bottom:40px}
+        }
+        @media(max-width:480px){
+            .hero-title{font-size:28px}
+            .cost-grid{grid-template-columns:1fr}
+            .cost-num{font-size:24px}
+            .cmp-row{grid-template-columns:1fr}
+            .cmp-cell:first-child{border-right:none;border-bottom:1px solid var(--coal)}
+            .hero-stats{gap:10px}
+            .cat-top{padding:18px 0}
+            .play-big{width:52px;height:52px}
+            .play-big svg{width:18px;height:18px}
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ember Orbs — Warm ambient glow -->
+    <div class="bg-orbs">
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+    </div>
+
+    <!-- Ticker -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span>Indian businesses lose ₹3-8 Lakhs/year on tasks AI can do for free</span>
+            <span>60% customer messages go unanswered after business hours</span>
+            <span>AI creates 100+ social media posts while you sleep</span>
+            <span>Chatbots handle 1000s of customers — zero salary</span>
+            <span>AI voice agents answer every call 24/7</span>
+            <span>Websites that took 4 weeks now take 1 hour with AI</span>
+            <span>AI video ads cost under ₹500 vs ₹25,000+ traditional</span>
+            <span>80% of leads never followed up — AI automation fixes this</span>
+            <span>Indian businesses lose ₹3-8 Lakhs/year on tasks AI can do for free</span>
+            <span>60% customer messages go unanswered after business hours</span>
+            <span>AI creates 100+ social media posts while you sleep</span>
+            <span>Chatbots handle 1000s of customers — zero salary</span>
+            <span>AI voice agents answer every call 24/7</span>
+            <span>Websites that took 4 weeks now take 1 hour with AI</span>
+            <span>AI video ads cost under ₹500 vs ₹25,000+ traditional</span>
+            <span>80% of leads never followed up — AI automation fixes this</span>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="nav-logo"><span class="lo-t">This</span><span class="lo-i">Is</span><span class="lo-a">AI</span></a>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#cost">What You Lose</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#hero" onclick="closeMenu()">Home</a>
+        <a href="#categories" onclick="closeMenu()">Categories</a>
+        <a href="#cost" onclick="closeMenu()">What You Lose</a>
+        <a href="#about" onclick="closeMenu()">About</a>
+        <a href="#contact" onclick="closeMenu()">Contact</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-dots"></div>
+        <div class="hero-content">
+            <div class="hero-badge reveal">◈ 6 categories · 30+ tools · Endless possibilities</div>
+            <h1 class="hero-title reveal rd1"><span class="l1">AI for Businesses That</span><br><span class="l2">Refuse to Stay Behind</span></h1>
+            <p class="hero-sub reveal rd2">A showcase of AI-powered tools — from images to voice agents — that Indian businesses should be using right now.</p>
+            <a href="#categories" class="hero-cta reveal rd3">Explore AI Tools <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8l5 5 5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <div class="hero-stats reveal rd4">
+                <div><div class="hero-stat-n">6</div><div class="hero-stat-l">Categories</div></div>
+                <div><div class="hero-stat-n">30+</div><div class="hero-stat-l">AI Tools</div></div>
+                <div><div class="hero-stat-n">∞</div><div class="hero-stat-l">Possibilities</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cost -->
+    <section class="section cost-section" id="cost">
+        <div class="container">
+            <div class="s-header"><div class="s-label reveal">The Reality</div><h2 class="s-title reveal rd1">The Cost of Ignoring AI</h2><p class="s-sub reveal rd2">Every day without AI, businesses lose time, money, and customers.</p></div>
+            <div class="cost-grid">
+                <div class="cost-card reveal"><div class="cost-icon">⏰</div><div class="cost-num">15+ Hrs/Wk</div><div class="cost-text">Wasted on tasks AI finishes in minutes</div></div>
+                <div class="cost-card reveal rd1"><div class="cost-icon">💬</div><div class="cost-num">60%</div><div class="cost-text">Messages unanswered after business hours</div></div>
+                <div class="cost-card reveal rd2"><div class="cost-icon">💸</div><div class="cost-num">₹3-8L/Yr</div><div class="cost-text">Spent on work AI does for almost free</div></div>
+                <div class="cost-card reveal rd3"><div class="cost-icon">🐌</div><div class="cost-num">10x Slower</div><div class="cost-text">Content creation without AI vs with AI</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="section" id="categories">
+        <div class="container">
+            <div class="s-header"><div class="s-label reveal">Explore</div><h2 class="s-title reveal rd1">What AI Can Do</h2><p class="s-sub reveal rd2">Click any category to see tools. Watch the demo video below each.</p></div>
+
+            <div class="cat-showcase">
+
+                <!-- Images -->
+                <div class="cat-block reveal" id="cat-img">
+                    <div class="cat-top" onclick="toggleBlock(this)">
+                        <div class="cat-top-left"><div class="cat-icon-wrap ico-img">🎨</div><div class="cat-meta"><h3>AI Images</h3><p>Design, Photography & Graphics</p></div></div>
+                        <div class="cat-count"><span class="cat-count-badge">6 tools</span><div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div></div>
+                    </div>
+                    <div class="cat-body"><div class="cat-body-inner">
+                        <p class="cat-desc">Logos, product photos, social media graphics, banners — AI generates professional-quality images in seconds. No Photoshop. No designers.</p>
+                        <div class="tools-list">
+                            <div class="tl-item" data-a="img"><div class="tl-num">01</div><div class="tl-content"><div class="tl-niche">Brand Identity</div><div class="tl-name">Logo Design with AI</div><div class="tl-desc">Generate unique logos from a business name and style preference. 50+ options instantly.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">50+ options in 2 mins · ₹0</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">3-7 days · ₹5K-25K</div></div></div></div>
+                            <div class="tl-item" data-a="img"><div class="tl-num">02</div><div class="tl-content"><div class="tl-niche">E-commerce</div><div class="tl-name">Product Photography with AI</div><div class="tl-desc">Studio-quality product images without camera or studio. Any background, any angle.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Instant shots · Any background</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">₹10K+/shoot · Days wait</div></div></div></div>
+                            <div class="tl-item" data-a="img"><div class="tl-num">03</div><div class="tl-content"><div class="tl-niche">Social Media</div><div class="tl-name">Social Media Post Design</div><div class="tl-desc">Branded Instagram, Facebook, LinkedIn graphics. Consistent brand identity every time.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">30 posts in 10 mins</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">₹15K/mo designer</div></div></div></div>
+                            <div class="tl-item" data-a="img"><div class="tl-num">04</div><div class="tl-content"><div class="tl-niche">Print & Offline</div><div class="tl-name">Business Card & Brochure</div><div class="tl-desc">Print-ready cards and brochures with multiple design variations. Instant generation.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Ready in 1 min</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">₹2K-5K · Revisions</div></div></div></div>
+                            <div class="tl-item" data-a="img"><div class="tl-num">05</div><div class="tl-content"><div class="tl-niche">Photo Editing</div><div class="tl-name">Background Remover & Editor</div><div class="tl-desc">One-click background removal and swap. Bulk process hundreds of images.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">1 click, 3 seconds</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">30 min/image manual</div></div></div></div>
+                            <div class="tl-item" data-a="img"><div class="tl-num">06</div><div class="tl-content"><div class="tl-niche">Paid Advertising</div><div class="tl-name">Banner & Ad Creative</div><div class="tl-desc">Google, Facebook, website banners in all sizes. Auto-generated A/B variations.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">All sizes, 1 click</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">₹1K+/banner</div></div></div></div>
+                        </div>
+                    </div></div>
+                </div>
+                <div class="demo-video reveal"><div class="demo-label"><div class="demo-label-line"></div><div class="demo-label-text"><span class="demo-dot"></span>AI Images Demo</div><div class="demo-label-line"></div></div><div class="demo-box"><div class="demo-inner"><div class="play-big"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div><div class="demo-title">Watch AI Images in Action</div><div class="demo-sub">Silent video · All 6 tools demonstrated</div></div></div></div>
+
+                <!-- Video & Audio -->
+                <div class="cat-block reveal" id="cat-vid">
+                    <div class="cat-top" onclick="toggleBlock(this)">
+                        <div class="cat-top-left"><div class="cat-icon-wrap ico-vid">🎬</div><div class="cat-meta"><h3>AI Video & Audio</h3><p>Ads, Reels, Voiceovers, Music & Dubbing</p></div></div>
+                        <div class="cat-count"><span class="cat-count-badge">8 tools</span><div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div></div>
+                    </div>
+                    <div class="cat-body"><div class="cat-body-inner">
+                        <p class="cat-desc">Professional videos and audio without cameras, mics, or editing software. Ads, reels, voiceovers, music, dubbing — AI handles everything.</p>
+                        <div class="tools-list">
+                            <div class="tl-item" data-a="vid"><div class="tl-num">01</div><div class="tl-content"><div class="tl-niche">Advertising</div><div class="tl-name">Video Ad Maker</div><div class="tl-desc">Promotional videos from text or product image. No filming or editing needed.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Video in 5 mins</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">₹25K+ · Weeks</div></div></div></div>
+                            <div class="tl-item" data-a="vid"><div class="tl-num">02</div><div class="tl-content"><div class="tl-niche">Social Media</div><div class="tl-name">Instagram Reel Generator</div><div class="tl-desc">Text to short-form vertical reels with auto-captions and transitions.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">10 reels/hour</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">2-3 hrs/reel</div></div></div></div>
+                            <div class="tl-item" data-a="vid"><div class="tl-num">03</div><div class="tl-content"><div class="tl-niche">Product</div><div class="tl-name">Explainer Video Creator</div><div class="tl-desc">Animated or talking-head explainers. Script in, professional video out.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">10 mins · Professional</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">₹30K-1L · 2-4 weeks</div></div></div></div>
+                            <div class="tl-item" data-a="vid"><div class="tl-num">04</div><div class="tl-content"><div class="tl-niche">Localization</div><div class="tl-name">Video & Audio Dubber</div><div class="tl-desc">Dub videos/audio into Hindi, Tamil, Telugu, Bengali with lip-sync and tone match.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">10 languages · Minutes</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">₹20K+/language</div></div></div></div>
+                            <div class="tl-item" data-a="vid"><div class="tl-num">05</div><div class="tl-content"><div class="tl-niche">Content</div><div class="tl-name">AI Voiceover Generator</div><div class="tl-desc">Natural human-like voiceovers in multiple languages. Multiple voice styles.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">30 seconds · Multi-voice</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">₹5K+/recording</div></div></div></div>
+                            <div class="tl-item" data-a="vid"><div class="tl-num">06</div><div class="tl-content"><div class="tl-niche">Reels & Ads</div><div class="tl-name">Background Music Creator</div><div class="tl-desc">Royalty-free music for any mood or genre. No copyright strikes.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Unlimited · Zero copyright</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">₹500-2K/track</div></div></div></div>
+                            <div class="tl-item" data-a="vid"><div class="tl-num">07</div><div class="tl-content"><div class="tl-niche">Social Proof</div><div class="tl-name">Testimonial Video Creator</div><div class="tl-desc">Written reviews become realistic testimonial videos. No customer coordination.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Text → Video</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">Camera + editing</div></div></div></div>
+                            <div class="tl-item" data-a="vid"><div class="tl-num">08</div><div class="tl-content"><div class="tl-niche">YouTube</div><div class="tl-name">Thumbnail Generator</div><div class="tl-desc">Click-worthy thumbnails optimized for views. Data-driven design.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">10 options, 1 min</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">Photoshop · 30+ min</div></div></div></div>
+                        </div>
+                    </div></div>
+                </div>
+                <div class="demo-video reveal"><div class="demo-label"><div class="demo-label-line"></div><div class="demo-label-text"><span class="demo-dot"></span>AI Video & Audio Demo</div><div class="demo-label-line"></div></div><div class="demo-box"><div class="demo-inner"><div class="play-big"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div><div class="demo-title">Watch AI Video & Audio in Action</div><div class="demo-sub">Silent video · All 8 tools demonstrated</div></div></div></div>
+
+                <!-- Chatbots -->
+                <div class="cat-block reveal" id="cat-chat">
+                    <div class="cat-top" onclick="toggleBlock(this)">
+                        <div class="cat-top-left"><div class="cat-icon-wrap ico-chat">🤖</div><div class="cat-meta"><h3>AI Chatbots</h3><p>WhatsApp, Website, Lead & Support Bots</p></div></div>
+                        <div class="cat-count"><span class="cat-count-badge">5 tools</span><div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div></div>
+                    </div>
+                    <div class="cat-body"><div class="cat-body-inner">
+                        <p class="cat-desc">AI chatbots that work 24/7 on WhatsApp and your website. Answer customers, capture leads, book appointments, track orders — no salaries, no breaks.</p>
+                        <div class="tools-list">
+                            <div class="tl-item" data-a="chat"><div class="tl-num">01</div><div class="tl-content"><div class="tl-niche">Customer Support</div><div class="tl-name">WhatsApp Chatbot</div><div class="tl-desc">Answers queries, takes orders, sends updates on WhatsApp 24/7. Handles thousands.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Instant · Handles 1000s</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">Missed msgs · ₹15K/mo</div></div></div></div>
+                            <div class="tl-item" data-a="chat"><div class="tl-num">02</div><div class="tl-content"><div class="tl-niche">Lead Generation</div><div class="tl-name">Website Chatbot</div><div class="tl-desc">Answers questions, books appointments, captures every website visitor as a lead.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Never miss a visitor</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">Visitors leave 30 sec</div></div></div></div>
+                            <div class="tl-item" data-a="chat"><div class="tl-num">03</div><div class="tl-content"><div class="tl-niche">Sales</div><div class="tl-name">Lead Qualification Bot</div><div class="tl-desc">Asks right questions, scores leads. Only qualified prospects reach you.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Only hot leads</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">Time on bad leads</div></div></div></div>
+                            <div class="tl-item" data-a="chat"><div class="tl-num">04</div><div class="tl-content"><div class="tl-niche">Service</div><div class="tl-name">FAQ & Support Bot</div><div class="tl-desc">Trained on your business. Answers all common questions instantly and accurately.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Instant · Zero wait</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">Repetitive calls</div></div></div></div>
+                            <div class="tl-item" data-a="chat"><div class="tl-num">05</div><div class="tl-content"><div class="tl-niche">E-commerce</div><div class="tl-name">Order Tracking Bot</div><div class="tl-desc">Customers check order status via chat. Reduces support calls by 40%.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Self-service 24/7</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">"Where's my order?"</div></div></div></div>
+                        </div>
+                    </div></div>
+                </div>
+                <div class="demo-video reveal"><div class="demo-label"><div class="demo-label-line"></div><div class="demo-label-text"><span class="demo-dot"></span>AI Chatbots Demo</div><div class="demo-label-line"></div></div><div class="demo-box"><div class="demo-inner"><div class="play-big"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div><div class="demo-title">Watch AI Chatbots in Action</div><div class="demo-sub">Silent video · All 5 tools demonstrated</div></div></div></div>
+
+                <!-- Voice Agents -->
+                <div class="cat-block reveal" id="cat-voice">
+                    <div class="cat-top" onclick="toggleBlock(this)">
+                        <div class="cat-top-left"><div class="cat-icon-wrap ico-voice">📞</div><div class="cat-meta"><h3>AI Voice Agents</h3><p>Receptionist, Reminders, Surveys & Outreach</p></div></div>
+                        <div class="cat-count"><span class="cat-count-badge">4 tools</span><div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div></div>
+                    </div>
+                    <div class="cat-body"><div class="cat-body-inner">
+                        <p class="cat-desc">AI that makes and receives phone calls. Professional receptionist, appointment reminders, feedback surveys, and outreach — all on autopilot.</p>
+                        <div class="tools-list">
+                            <div class="tl-item" data-a="voice"><div class="tl-num">01</div><div class="tl-content"><div class="tl-niche">Front Desk</div><div class="tl-name">AI Phone Receptionist</div><div class="tl-desc">Answers every business call professionally. 24/7, no hold time.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Every call answered</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">Missed calls · ₹12K/mo</div></div></div></div>
+                            <div class="tl-item" data-a="voice"><div class="tl-num">02</div><div class="tl-content"><div class="tl-niche">Healthcare</div><div class="tl-name">Appointment Reminder</div><div class="tl-desc">Auto-calls to confirm appointments. Eliminates no-shows completely.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Zero no-shows</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">20-30% no-show</div></div></div></div>
+                            <div class="tl-item" data-a="voice"><div class="tl-num">03</div><div class="tl-content"><div class="tl-niche">CX</div><div class="tl-name">Feedback & Survey Caller</div><div class="tl-desc">AI calls post-purchase for feedback. Auto-analyzed with insights.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">100% surveyed</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">5% response rate</div></div></div></div>
+                            <div class="tl-item" data-a="voice"><div class="tl-num">04</div><div class="tl-content"><div class="tl-niche">Sales</div><div class="tl-name">Cold Outreach Caller</div><div class="tl-desc">100 calls/hour from your lead list. Consistent pitch, zero fatigue.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">100 calls/hour</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">10 calls/hour</div></div></div></div>
+                        </div>
+                    </div></div>
+                </div>
+                <div class="demo-video reveal"><div class="demo-label"><div class="demo-label-line"></div><div class="demo-label-text"><span class="demo-dot"></span>AI Voice Agents Demo</div><div class="demo-label-line"></div></div><div class="demo-box"><div class="demo-inner"><div class="play-big"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div><div class="demo-title">Watch AI Voice Agents in Action</div><div class="demo-sub">Silent video · All 4 tools demonstrated</div></div></div></div>
+
+                <!-- Websites -->
+                <div class="cat-block reveal" id="cat-web">
+                    <div class="cat-top" onclick="toggleBlock(this)">
+                        <div class="cat-top-left"><div class="cat-icon-wrap ico-web">🌐</div><div class="cat-meta"><h3>AI Websites</h3><p>Landing Pages, Portfolio, E-commerce & Blog</p></div></div>
+                        <div class="cat-count"><span class="cat-count-badge">4 tools</span><div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div></div>
+                    </div>
+                    <div class="cat-body"><div class="cat-body-inner">
+                        <p class="cat-desc">Complete websites built by AI. Landing pages to e-commerce stores. Mobile-optimized, fast, live in hours — no coding required.</p>
+                        <div class="tools-list">
+                            <div class="tl-item" data-a="web"><div class="tl-num">01</div><div class="tl-content"><div class="tl-niche">Marketing</div><div class="tl-name">Landing Page Builder</div><div class="tl-desc">High-converting pages for products, services, events. Live in 1 hour.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Live in 1 hour</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">₹15K-50K · 2-4 wks</div></div></div></div>
+                            <div class="tl-item" data-a="web"><div class="tl-num">02</div><div class="tl-content"><div class="tl-niche">Personal Brand</div><div class="tl-name">Portfolio Website</div><div class="tl-desc">Professional portfolios for freelancers and businesses. Free hosting.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">30 mins · Free</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">₹10K+ · Weeks</div></div></div></div>
+                            <div class="tl-item" data-a="web"><div class="tl-num">03</div><div class="tl-content"><div class="tl-niche">Online Selling</div><div class="tl-name">E-commerce Store</div><div class="tl-desc">Full store with product pages, cart, checkout. AI writes descriptions.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Store in 1 day</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">₹50K-2L · Months</div></div></div></div>
+                            <div class="tl-item" data-a="web"><div class="tl-num">04</div><div class="tl-content"><div class="tl-niche">SEO & Traffic</div><div class="tl-name">Blog & Content Site</div><div class="tl-desc">SEO-optimized blog that generates traffic on autopilot. 50+ posts/month.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">50 posts/month</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">₹20K/mo writer</div></div></div></div>
+                        </div>
+                    </div></div>
+                </div>
+                <div class="demo-video reveal"><div class="demo-label"><div class="demo-label-line"></div><div class="demo-label-text"><span class="demo-dot"></span>AI Websites Demo</div><div class="demo-label-line"></div></div><div class="demo-box"><div class="demo-inner"><div class="play-big"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div><div class="demo-title">Watch AI Websites in Action</div><div class="demo-sub">Silent video · All 4 tools demonstrated</div></div></div></div>
+
+                <!-- Automations -->
+                <div class="cat-block reveal" id="cat-auto">
+                    <div class="cat-top" onclick="toggleBlock(this)">
+                        <div class="cat-top-left"><div class="cat-icon-wrap ico-auto">⚡</div><div class="cat-meta"><h3>AI Automations</h3><p>Social Media, Email, CRM & Follow-ups</p></div></div>
+                        <div class="cat-count"><span class="cat-count-badge">5 tools</span><div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div></div>
+                    </div>
+                    <div class="cat-body"><div class="cat-body-inner">
+                        <p class="cat-desc">Set up once, runs forever. Social media posting, email replies, invoicing, reputation management, lead follow-ups — all automated by AI.</p>
+                        <div class="tools-list">
+                            <div class="tl-item" data-a="auto"><div class="tl-num">01</div><div class="tl-content"><div class="tl-niche">Social Media</div><div class="tl-name">Auto-Poster</div><div class="tl-desc">Create and post across Instagram, Facebook, LinkedIn on schedule.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Set once, forever</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">Daily manual work</div></div></div></div>
+                            <div class="tl-item" data-a="auto"><div class="tl-num">02</div><div class="tl-content"><div class="tl-niche">Communication</div><div class="tl-name">Email Auto-Responder</div><div class="tl-desc">Smart contextual email replies. Professional, instant, 24/7.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Instant · 24/7</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">Delayed · Lost deals</div></div></div></div>
+                            <div class="tl-item" data-a="auto"><div class="tl-num">03</div><div class="tl-content"><div class="tl-niche">Accounting</div><div class="tl-name">Invoice Processor</div><div class="tl-desc">Scan invoices, extract data, organize. Zero manual entry, zero errors.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Scan → Done</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">Manual · Errors</div></div></div></div>
+                            <div class="tl-item" data-a="auto"><div class="tl-num">04</div><div class="tl-content"><div class="tl-niche">Brand</div><div class="tl-name">Review Manager</div><div class="tl-desc">Monitor reviews, auto-respond professionally. Protects reputation 24/7.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">Reply in minutes</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">Reviews pile up</div></div></div></div>
+                            <div class="tl-item" data-a="auto"><div class="tl-num">05</div><div class="tl-content"><div class="tl-niche">Sales</div><div class="tl-name">Lead Follow-Up</div><div class="tl-desc">Auto WhatsApp, emails, reminders to leads. 7 touchpoints, zero effort.</div></div><div class="tl-compare"><div class="tl-cmp tl-cmp-w"><span class="tl-cmp-icon">✓</span><div class="tl-cmp-t">No lead forgotten</div></div><div class="tl-cmp tl-cmp-x"><span class="tl-cmp-icon">✗</span><div class="tl-cmp-t">80% lost</div></div></div></div>
+                        </div>
+                    </div></div>
+                </div>
+                <div class="demo-video reveal"><div class="demo-label"><div class="demo-label-line"></div><div class="demo-label-text"><span class="demo-dot"></span>AI Automations Demo</div><div class="demo-label-line"></div></div><div class="demo-box"><div class="demo-inner"><div class="play-big"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div><div class="demo-title">Watch AI Automations in Action</div><div class="demo-sub">Silent video · All 5 tools demonstrated</div></div></div></div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section how-section" id="how">
+        <div class="container">
+            <div class="s-header"><div class="s-label reveal">Guide</div><h2 class="s-title reveal rd1">How This Showcase Works</h2><p class="s-sub reveal rd2">Three steps to explore what AI can do.</p></div>
+            <div class="steps-row">
+                <div class="step reveal"><div class="step-icon">🔍</div><h3>Browse Categories</h3><p>Pick what interests you — images, video, chatbots, and more.</p></div>
+                <div class="step reveal rd2"><div class="step-icon">📖</div><h3>Read the Tools</h3><p>Each tool explains what it does, its niche, and real cost comparison.</p></div>
+                <div class="step reveal rd3"><div class="step-icon">▶️</div><h3>Watch the Demo</h3><p>Below each category, a silent demo video shows everything in action.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="section" id="compare">
+        <div class="container">
+            <div class="s-header"><div class="s-label reveal">Side by Side</div><h2 class="s-title reveal rd1">Before AI vs After AI</h2><p class="s-sub reveal rd2">The difference is massive.</p></div>
+            <div class="cmp-table reveal rd3">
+                <div class="cmp-row cmp-head"><div class="cmp-cell bad">Without AI</div><div class="cmp-cell good">With AI</div></div>
+                <div class="cmp-row"><div class="cmp-cell bad"><span class="cx">✗</span> Reply in 24 hrs</div><div class="cmp-cell good"><span class="ck">✓</span> Instant 24/7</div></div>
+                <div class="cmp-row"><div class="cmp-cell bad"><span class="cx">✗</span> ₹30K/mo designer</div><div class="cmp-cell good"><span class="ck">✓</span> AI in seconds</div></div>
+                <div class="cmp-row"><div class="cmp-cell bad"><span class="cx">✗</span> Miss leads after 6 PM</div><div class="cmp-cell good"><span class="ck">✓</span> Capture 24/7</div></div>
+                <div class="cmp-row"><div class="cmp-cell bad"><span class="cx">✗</span> Manual invoices</div><div class="cmp-cell good"><span class="ck">✓</span> Auto, 0 errors</div></div>
+                <div class="cmp-row"><div class="cmp-cell bad"><span class="cx">✗</span> 10 posts/month</div><div class="cmp-cell good"><span class="ck">✓</span> 100+/month</div></div>
+                <div class="cmp-row"><div class="cmp-cell bad"><span class="cx">✗</span> ₹25K+ video</div><div class="cmp-cell good"><span class="ck">✓</span> Under ₹500</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="section about-section" id="about">
+        <div class="container">
+            <div class="about-inner">
+                <div class="about-avatar reveal">🧠</div>
+                <div class="s-label reveal">About</div>
+                <h2 class="s-title reveal rd1">Why I Built This</h2>
+                <p class="about-text reveal rd2">I'm exploring what AI can do for everyday Indian businesses — and documenting it here.</p>
+                <p class="about-text reveal rd3">No fluff. No hype. Just real demonstrations of what's possible today.</p>
+                <div class="about-tags reveal rd4">
+                    <span class="about-tag">Solo Creator</span>
+                    <span class="about-tag">Based in India</span>
+                    <span class="about-tag">Building in Public</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact-section" id="contact">
+        <div class="container">
+            <div class="s-header"><div class="s-label reveal">Connect</div><h2 class="s-title reveal rd1">Want to Talk About AI?</h2><p class="s-sub reveal rd2">Questions? Curious about a tool? Just reach out.</p></div>
+            <div class="contact-wrap reveal rd3">
+                <form class="c-form" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="YOUR-KEY">
+                    <div class="fg"><label>Name</label><input type="text" name="name" placeholder="Your name" required></div>
+                    <div class="fg"><label>WhatsApp</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required></div>
+                    <div class="fg"><label>Interest</label><select name="interest"><option disabled selected>Select category</option><option>🎨 Images</option><option>🎬 Video & Audio</option><option>🤖 Chatbots</option><option>📞 Voice Agents</option><option>🌐 Websites</option><option>⚡ Automations</option><option>Everything</option></select></div>
+                    <div class="fg"><label>Message</label><textarea name="message" placeholder="What are you curious about?"></textarea></div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+                <div class="divider"><span>or</span></div>
+                <a href="https://wa.me/91XXXXXXXXXX" class="wa-btn" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-row">
+                <div><div class="footer-brand">This<span class="fi">Is</span><span class="fa">AI</span></div><div class="footer-tagline">Showcasing AI for Indian businesses</div></div>
+                <ul class="footer-nav"><li><a href="#hero">Home</a></li><li><a href="#categories">Categories</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
+            </div>
+            <div class="footer-bottom">Made with 🤍 in India · © 2025 ThisIsAI</div>
+        </div>
+    </footer>
+
+    <script>
+        const navbar=document.getElementById('navbar');
+        window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>50)});
+        const hamburger=document.getElementById('hamburger'),mm=document.getElementById('mobileMenu');
+        hamburger.addEventListener('click',()=>{hamburger.classList.toggle('active');mm.classList.toggle('active');document.body.style.overflow=mm.classList.contains('active')?'hidden':''});
+        function closeMenu(){hamburger.classList.remove('active');mm.classList.remove('active');document.body.style.overflow=''}
+        function toggleBlock(el){const b=el.closest('.cat-block'),w=b.classList.contains('open');document.querySelectorAll('.cat-block.open').forEach(x=>x.classList.remove('open'));if(!w){b.classList.add('open');setTimeout(()=>{b.scrollIntoView({behavior:'smooth',block:'start'})},100)}}
+        const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active')})},{threshold:.1,rootMargin:'0px 0px -20px 0px'});
+        document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)window.scrollTo({top:t.offsetTop-90,behavior:'smooth'})})});
+    </script>
+</body>
+</html>
